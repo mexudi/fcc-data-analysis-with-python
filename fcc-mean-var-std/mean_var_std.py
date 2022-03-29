@@ -1,8 +1,10 @@
 import numpy as np
 
-def calculate(list):
+def calculate(liste):
+    if len(liste)!=9:
+        raise ValueError("List must contain nine numbers.")
     calculation = {}
-    arr = np.array(list)
+    arr = np.array(liste)
     arr = arr.reshape(3,3)
     mean0 = np.mean(arr)
     mean1 = np.mean(arr,axis=0)
@@ -23,7 +25,7 @@ def calculate(list):
     min0 = np.min(arr)
     min1 = np.min(arr,axis=0)
     min2 = np.min(arr,axis=1)
-    calculation['min'] = [list(max1),list(max2),max0]
+    calculation['min'] = [list(min1),list(min2),min0]
     sum0 = np.sum(arr)
     sum1 = np.sum(arr, axis=0)
     sum2 = np.sum(arr,axis=1)
