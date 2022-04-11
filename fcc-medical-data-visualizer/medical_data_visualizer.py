@@ -52,16 +52,22 @@ def draw_heat_map():
 
     # Calculate the correlation matrix
     corr = df_heat.corr()
+    corr = corr.round(1)
+
 
     # Generate a mask for the upper triangle
-    mask = None
+     mask = np.triu(np.ones_like(corr, dtype=np.bool))
 
 
 
     # Set up the matplotlib figure
-    fig, ax = None
+    fig, ax = plt.subplots(figsize=(12, 9))
+
 
     # Draw the heatmap with 'sns.heatmap()'
+    heat_map = sns.heatmap(corr, mask=mask, annot=True, fmt=".1f", square=True)
+    heat_map.set_yticklabels(heat_map.get_yticklabels(), rotation=0)
+    heat_map.set_xticklabels(heat_map.get_xticklabels(), rotation=90)
 
 
 
