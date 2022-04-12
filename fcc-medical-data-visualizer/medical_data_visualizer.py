@@ -8,8 +8,8 @@ df = pd.read_csv('medical_examination.csv')
 
 # Add 'overweight' column
 df['overweight'] = df.weight/((df.height/100)**2)
-df.loc[df.overweight > 25, 'overweight'] = 1
 df.loc[df.overweight <= 25, 'overweight'] = 0
+df.loc[df.overweight > 25, 'overweight'] = 1
 
 # Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
 df.loc[df.gluc==1,'gluc'] = 0
@@ -40,7 +40,7 @@ def draw_cat_plot():
 # Draw Heat Map
 def draw_heat_map():
     # Clean the data
-    df_heat = df[df.ap_lo <= df.hi_hi]
+    df_heat = df[df.ap_lo <= df.ap_hi]
     h025 = df['height'].quantile(0.025)
     h975 = df['height'].quantile(0.975)
     w025 = df['weight'].quantile(0.025)
@@ -56,7 +56,7 @@ def draw_heat_map():
 
 
     # Generate a mask for the upper triangle
-     mask = np.triu(np.ones_like(corr, dtype=np.bool))
+    mask = np.triu(np.ones_like(corr, dtype=bool))
 
 
 
